@@ -1,0 +1,11 @@
+services:
+  frontend:
+    build: .
+    ports:
+      - "3001:3001"
+  db:
+    build: 
+      context: .
+      dockerfile: ./Dockerfile-DB
+    ports: 
+      - "3000:3000"
