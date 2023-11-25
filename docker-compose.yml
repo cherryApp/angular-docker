@@ -1,4 +1,14 @@
 services:
+  proxy:
+    image: haproxy:2.7.10-alpine
+    hostname: proxy
+    volumes:
+      - ./haproxy:/usr/local/etc/haproxy
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - mynet
   frontend:
     build: .
     hostname: frontend
@@ -15,6 +25,10 @@ services:
       - mynet
     ports: 
       - "3000:3000"
+
 networks:
-    mynet:
-      driver: bridge    
+  mynet:
+    driver: bridge
+
+volumes:
+  haproxy:

@@ -11,7 +11,7 @@ export class UserService {
 
   http = inject(HttpClient);
 
-  apiUrl: string = environment.apiUrl + '/users';
+  apiUrl: string = environment.apiUrl() + 'users';
 
   list$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
 
@@ -20,6 +20,7 @@ export class UserService {
   constructor() { }
 
   getAll(limit?: {page: number, limit: number}): void {
+    console.log(this.apiUrl);
     const url = limit
       ? `${this.apiUrl}?_page=${limit.page}&_limit=${limit.limit}`
       : this.apiUrl;
